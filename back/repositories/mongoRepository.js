@@ -1,21 +1,31 @@
-const mongoose = require('mongoose')
-const Menu = require('../models/menu')
-const {badRequestError, eternalServerError} = require('../errors')
+const mongoose = require('mongoose');
+const Menu = require('../models/menu');
+const User = require('../models/user');
+const {badRequestError, eternalServerError} = require('../errors');
 
-class MongoRepository {
-    constructor() {
-        const menuSchema = new mongoose.Schema(Menu);
-        this.menuModel = mongoose.model('Menu' , menuSchema);
-    }
-
+module.exports = {
     async getMenuCollectionBySubject(subject) {
         try {
-            return await this.menuModel.find({'subject': subject});
+            return await Menu.find({'subject': subject});
         } catch(err) {
-            throw new eternalServerError(err)
+            throw new eternalServerError(err);
+        }
+    },
+
+    async addUser(userInfo) {
+        try {
+            await User.create(userInfo);
+        } catch(err) {
+            throw new eternalServerError(err);
+        }
+    },
+
+    async findUserByEmail(userInfo) {
+        try {
+            return await User.findOne(userInfo)
+        } catch(err) {
+            throw new eternalServerError(err);
         }
     }
-
 }
 
-module.exports = MongoRepository;

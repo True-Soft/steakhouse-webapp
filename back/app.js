@@ -1,8 +1,8 @@
 const express = require('express');
 const config = require('./config/config');
 const entityRouter = require('./routers/entityRouter');
-const morgan = require('morgan')
-const mongoose = require('mongoose')
+const morgan = require('morgan');
+const mongoose = require('mongoose');
 
 const app = express();
 
