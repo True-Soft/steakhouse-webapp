@@ -4,6 +4,6 @@ module.exports = {
     },
     
     async history(req , res) {
-        
+
     }
 }

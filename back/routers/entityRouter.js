@@ -20,5 +20,5 @@ router
     .post('/buy' , purchaseController.buy)
     //PUT
     .put('/update-profile' , profileController.updateProfile)
-    
+
 module.exports = router;
