@@ -1,5 +1,6 @@
 const Menu = require('../models/menu');
 const User = require('../models/user');
+
 const Purchase = require('../models/Purchase');
 const {internalServerError} = require('../errors');
 
@@ -59,6 +60,14 @@ module.exports = {
         } catch(err) {
             throw new internalServerError(err);
         }
+    },
+
+    async updateUser(userInfo) {
+        try {
+            await User.updateOne({email: userInfo.email} , userInfo)
+        } catch(err) {
+            throw new internalServerError(err);
+        } 
     }
 }
 
