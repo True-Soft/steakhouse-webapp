@@ -12,13 +12,34 @@ class badRequestError extends httpErrors{
       }
 }
 
-class eternalServerError extends httpErrors{
+class internalServerError extends httpErrors{
     constructor(message) {
         super(500, message);
       }
 }
 
+class unauthorizedError extends httpErrors{
+    constructor(message) {
+        super(401, message);
+      }
+}
+
+class forbiddenError extends httpErrors{
+    constructor(message) {
+        super(403, message);
+      }
+}
+
+class notFoundError extends httpErrors{
+    constructor(message) {
+        super(404, message);
+      }
+}
+
 module.exports = {
     badRequestError,
-    eternalServerError
+    internalServerError,
+    unauthorizedError,
+    forbiddenError,
+    notFoundError
 };
