@@ -9,7 +9,6 @@ module.exports = {
     },
 
     jwtSign(tokenInfo) {
-        console.log(tokenInfo)
         return jwt.sign(tokenInfo , config.jwtKey , {
             expiresIn: "2h"});
     },
