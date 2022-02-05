@@ -1,12 +1,20 @@
-const mongoose = require('mongoose');
 const Menu = require('../models/menu');
 const User = require('../models/user');
-const {badRequestError, internalServerError} = require('../errors');
+const {internalServerError} = require('../errors');
+const Purchase = require('../models/Purchase');
 
 module.exports = {
     async getMenuCollectionBySubject(subject) {
         try {
             return await Menu.find({'subject': subject});
+        } catch(err) {
+            throw new internalServerError(err);
+        }
+    },
+
+    async getMenuById(menuId) {
+        try {
+            return await Menu.findOne({'_id': menuId})
         } catch(err) {
             throw new internalServerError(err);
         }
@@ -34,6 +42,23 @@ module.exports = {
         } catch(err) {
             throw new internalServerError(err);
         } 
+    },
+
+    async addPurchase(purchase) {
+        try {
+            await Purchase.insertMany(purchase);
+        } catch(err) {
+            throw new internalServerError(err);
+        }
+    },
+
+    async getPurchase(email) {
+        try {
+            return await Purchase.aggregate([{ $match : { email: email } } , 
+                                            {$group : {_id:{menuId:"$menuId", email:"$email" , date: "$date"}, amount:{$sum:1}}}]);
+        } catch(err) {
+            throw new internalServerError(err);
+        }
     }
 }
 
