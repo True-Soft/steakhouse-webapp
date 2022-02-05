@@ -1,7 +1,7 @@
 const Menu = require('../models/menu');
 const User = require('../models/user');
-const {internalServerError} = require('../errors');
 const Purchase = require('../models/Purchase');
+const {internalServerError} = require('../errors');
 
 module.exports = {
     async getMenuCollectionBySubject(subject) {
