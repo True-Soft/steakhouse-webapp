@@ -18,7 +18,14 @@ class eternalServerError extends httpErrors{
       }
 }
 
+class unauthorizedError extends httpErrors{
+    constructor(message) {
+        super(401, message);
+      }
+}
+
 module.exports = {
     badRequestError,
-    eternalServerError
+    eternalServerError,
+    unauthorizedError
 };

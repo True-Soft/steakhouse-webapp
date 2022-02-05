@@ -20,12 +20,13 @@ module.exports = {
         }
     },
 
-    async findUserByEmail(userInfo) {
+    async findUser(userInfo) {
         try {
             return await User.findOne(userInfo)
         } catch(err) {
             throw new eternalServerError(err);
         }
     }
+
 }
 

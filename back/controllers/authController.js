@@ -1,4 +1,4 @@
-const { hash } = require("../middleware/middleware");
+const { hash, jwtSign } = require("../middleware/middleware");
 const mongoRepository = require('../repositories/mongoRepository');
 
 module.exports = {
@@ -15,6 +15,13 @@ module.exports = {
             password: hash(req.body.password)
         }
         try {
+            const user = await mongoRepository.findUser({email: userInfo.email});
+            if(user) {
+                const err = "This user exists";
+                console.error(err);
+                res.status(400).json(err);
+                return
+            }
             await mongoRepository.addUser(userInfo);
             res.status(200).send("OK");
         } catch(err) {
@@ -35,9 +42,16 @@ module.exports = {
             password: hash(req.body.password)
         }
         try {
-            const user = await mongoRepository.findUserByEmail(userInfo);
-            res.status(200).json(user);
-            //TODO jwt
+            const user = await mongoRepository.findUser(userInfo);
+            if(!user) {
+                res.status(404).json("User not found");
+                return;
+            }
+            const token = jwtSign({
+                email: user.email,
+                password: user.password,
+            });
+            res.status(200).json({ name: user.name, token})
         } catch(err) {
             console.error(err);
             res.status(err.status).json(err);
