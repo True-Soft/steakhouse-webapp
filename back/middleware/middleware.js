@@ -1,7 +1,7 @@
 const { createHash } = require('crypto');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
-const { unauthorizedError } = require('../errors')
+const { forbiddenError } = require('../errors')
 
 module.exports = {
     hash(string) {
@@ -16,10 +16,10 @@ module.exports = {
 
     jwtVerify(token) {
         try {
-            const decoded = jwt.verify(token, config.jwt);
+            const decoded = jwt.verify(token, config.jwtKey);
             return decoded;
         } catch (err) {
-            throw new unauthorizedError(err);
+            throw new forbiddenError(err);
         }
     }
 }

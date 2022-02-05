@@ -1,60 +1,53 @@
+const { badRequestError, notFoundError } = require("../errors");
 const { hash, jwtSign } = require("../middleware/middleware");
 const mongoRepository = require('../repositories/mongoRepository');
 
 module.exports = {
     async signUp(req ,res) {
-        if(!req.body.name || !req.body.email || !req.body.password) {
-            const err = "Bad request";
-            console.error(err);
-            res.status(400).json(err);
-            return
-        }
-        const userInfo = {
-            name: req.body.name,
-            email: req.body.email,
-            password: hash(req.body.password)
-        }
-        try {
+        try{
+            if(!req.body.name || !req.body.email || !req.body.password) {
+                const err = "Bad request";
+                throw new badRequestError(err);
+            }
+            const userInfo = {
+                name: req.body.name,
+                email: req.body.email,
+                password: hash(req.body.password)
+            }
             const user = await mongoRepository.findUser({email: userInfo.email});
             if(user) {
                 const err = "This user exists";
-                console.error(err);
-                res.status(400).json(err);
-                return
+                throw new badRequestError(err);
             }
             await mongoRepository.addUser(userInfo);
-            res.status(200).send("OK");
+            res.json("OK");
         } catch(err) {
-            console.error(err);
-            res.status(err.status).json(err);
+            res.status(err.status).json(err.message);
         }
     },
 
     async login(req, res) {
-        if(!req.body.email || !req.body.password){
-            const err = "Bad request";
-            console.error(err);
-            res.status(400).json(err);
-            return
-        }
-        const userInfo = {
-            email: req.body.email,
-            password: hash(req.body.password)
-        }
-        try {
+        try{
+            if(!req.body.email || !req.body.password){
+                const err = "Bad request";
+                throw new badRequestError(err);
+            }
+            const userInfo = {
+                email: req.body.email,
+                password: hash(req.body.password)
+            }
             const user = await mongoRepository.findUser(userInfo);
             if(!user) {
-                res.status(404).json("User not found");
-                return;
+                const err = "User not found";
+                throw new notFoundError(err);
             }
             const token = jwtSign({
                 email: user.email,
                 password: user.password,
             });
-            res.status(200).json({ name: user.name, token})
+            res.json({ name: user.name, token})
         } catch(err) {
-            console.error(err);
-            res.status(err.status).json(err);
+            res.status(err.status).json(err.message);
         }
     },
 }
