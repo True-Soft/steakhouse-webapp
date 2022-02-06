@@ -1,7 +1,5 @@
-const { currentDate } = require('../middleware/middleware');
 const mongoRepository = require('../repositories/mongoRepository');
 const { jwtVerify } = require('../middleware/middleware');
-const { use } = require('../routers/entityRouter');
 
 module.exports = {
     async buy(req , res) {
@@ -14,18 +12,22 @@ module.exports = {
             }
             const user = jwtVerify(token);
             const purchase = req.body.purchase;
+            let purchasePrice = 0;
             for(const item of purchase) {
+                const menuInfo = await mongoRepository.getMenuById(item.menuId);
+                purchasePrice += menuInfo.price;
                 item.email = user.email;
                 item.date = new Date().toDateString();
             }
             await mongoRepository.addPurchase(purchase);
-            let points = 0;
-            if(req.body.points) {
-                points = req.body.points;
-                const profile = await mongoRepository.findUser(user);
-                //TODO points score
+            const points = req.body.points || 0;
+            const profile = await mongoRepository.findUser(user);
+            profile.points -= points;
+            if(profile.points < 0) {
+                profile.points = 0;
             }
-            
+            profile.points += parseInt(purchasePrice*0.05);
+            await mongoRepository.updateUser(profile);
             res.json("OK");
         } catch(err) {
             res.status(err.status).json(err.message);

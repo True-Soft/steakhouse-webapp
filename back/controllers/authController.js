@@ -12,7 +12,8 @@ module.exports = {
             const userInfo = {
                 name: req.body.name,
                 email: req.body.email,
-                password: hash(req.body.password)
+                password: hash(req.body.password),
+                points: 0,
             }
             const user = await mongoRepository.findUser({email: userInfo.email});
             if(user) {

@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const config = require('./config/config');
 const entityRouter = require('./routers/entityRouter');
 const morgan = require('morgan');
@@ -16,13 +17,13 @@ connectOptions = {
 mongoose.connect(dbUrl , connectOptions)
                 .catch(console.error);
 console.log('Mongoose connected on app creation');
-app.use(morgan('dev'))
-app.use('', entityRouter);
 
+app.use(cors());
+app.use(morgan('tiny'));
+app.use('', entityRouter);
 app.listen(config.port, () => {
   console.log(`Steakhouse-webapp is listening on port ${config.port}`)
 });
-
 process.on('SIGINT', function() {
   mongoose.connection.close(function () {
     console.log('Mongoose disconnected on app termination');

@@ -5,7 +5,6 @@ const authController = require('../controllers/authController');
 const profileController = require('../controllers/profileController');
 const purchaseController = require('../controllers/purchaseController');
 
-
 router.use(bodyparser.json());
 router.use(bodyparser.urlencoded({ extended: true }));
 
