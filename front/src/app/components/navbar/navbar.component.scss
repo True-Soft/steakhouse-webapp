@@ -1,3 +1,6 @@
+$color-black: #000;
+
+
 .logo{
     max-width: 220px;
     max-height: 62px;
@@ -9,6 +12,10 @@
 
 .container-fluid{
     padding: 1rem 1.75rem;
+}
+
+.navbar{
+    background-color: $color-black;
 }
 
 .navbar-transparent{
