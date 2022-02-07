@@ -1,9 +1,20 @@
 
-.picsum-img-wrapper{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+
+
+$color-white: #fff;
+$color-brown: #c7a67f;
+$color-red:   #712d3d;
+$color-black: #000;
+
+img{
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-
-
+.carousel-inner{
+    background-color: $color-red;
+}

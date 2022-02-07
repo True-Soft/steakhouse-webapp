@@ -3,7 +3,25 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
+/* importing font family Oswald. */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&display=swap');
 
-.sr-only{
-    text-shadow: 0 0 10px #000;
+$color-white: #fff;
+$color-brown: #c7a67f;
+$color-red:   #712d3d;
+$color-black: #000;
+
+
+.nav-link{
+    font-family: Oswald;
+    font-weight: 500;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+    color: $color-white !important;
 }
+
+.nav-link:hover{
+    color: $color-brown !important;
+}
+

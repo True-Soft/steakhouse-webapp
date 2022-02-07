@@ -8,8 +8,8 @@ import { HomeComponent } from './components/home/home.component';
 import { MenusComponent } from './components/menus/menus.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-//import { CarouselComponent } from './shared/components/carousel/carousel.component';
 import { SharedModule } from './shared/shared.module';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { SharedModule } from './shared/shared.module';
     HomeComponent,
     MenusComponent,
     ContactsComponent,
-    //CarouselComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +29,7 @@ import { SharedModule } from './shared/shared.module';
   providers: [],
   bootstrap: [AppComponent],
   exports: [
-    //CarouselComponent
+
   ]
 })
 export class AppModule { }
