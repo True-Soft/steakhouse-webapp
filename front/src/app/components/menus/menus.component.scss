@@ -1,0 +1,88 @@
+body {
+    font-weight: 400;
+    letter-spacing: 0px;
+    background-repeat: repeat;
+    background-position: top left;
+    font-family: "Univers LT Pro 47 Lt Cn";
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #3e3c3c;
+    background-color: #fff;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+div {
+    display: block;
+}
+.container-sm{
+    padding-left: 1.85rem;
+    padding-right: 1.85rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 640px;
+    box-sizing: inherit;
+}
+
+.menu-section{
+    padding: 2rem;
+    text-align: left;
+    margin-bottom: 2.5rem;
+    background-color: #f9f7f1;
+    padding: 2rem;
+}
+
+.menu-section__header{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.menu-item{
+    margin-bottom: 1.5rem;
+    box-sizing: inherit;
+}
+
+.menu-item__heading{
+    font-family: "Univers LT Pro 47 Lt Cn";
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+p {
+    margin-top: 0rem;
+    display: block;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: 100;
+    font-size: 1rem;
+}
+
+li {
+    text-align: -webkit-match-parent;
+}
+
+h2 {
+    font-family: "Univers LT Pro 47 Lt Cn Bold";
+    color: #712d3d;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 0rem;
+    font-size: 3rem;
+}
+.menu-section h2 {
+    margin-bottom: 0;
+    border-bottom: 2px solid;
+}
+.menu-section>ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+.container-sm::after {
+    content: "";
+    display: table;
+    clear: both;
+}
