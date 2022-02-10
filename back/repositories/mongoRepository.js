@@ -3,6 +3,7 @@ const User = require('../models/user');
 
 const Purchase = require('../models/Purchase');
 const {internalServerError} = require('../errors');
+const { getMenuSubjects } = require('../controllers/menuController');
 
 module.exports = {
     async getMenuCollectionBySubject(subject) {
@@ -16,6 +17,14 @@ module.exports = {
     async getMenuById(menuId) {
         try {
             return await Menu.findOne({'_id': menuId})
+        } catch(err) {
+            throw new internalServerError(err);
+        }
+    },
+
+    async getMenuSubjects() {
+        try {
+            return await Menu.find({});
         } catch(err) {
             throw new internalServerError(err);
         }

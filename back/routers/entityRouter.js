@@ -10,6 +10,7 @@ router.use(bodyparser.urlencoded({ extended: true }));
 
 router
     //GET
+    .get('/menu/subjects' , menuController.getMenuSubjects)
     .get('/menu/:subject' , menuController.getMenuBySubject)
     .get('/profile-info' , profileController.profileInfo)
     .get('/history' , purchaseController.history)

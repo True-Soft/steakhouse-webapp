@@ -10,4 +10,13 @@ module.exports = {
             res.status(err.status).json(err.message);
         }
     },
+
+    async getMenuSubjects(req , res) {
+        try {
+            const subjectArr = await mongoRepository.getMenuSubjects();
+            res.json(subjectArr);
+        }catch(err) {
+            res.status(err.status).json(err.message);
+        }
+    }
 }
