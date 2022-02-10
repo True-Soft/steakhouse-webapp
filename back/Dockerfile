@@ -1,4 +1,4 @@
-FROM node:17
+FROM node:14
 
 ARG PORT=3000
 
