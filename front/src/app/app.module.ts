@@ -5,7 +5,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
-import { MenusComponent } from './components/menus/menus.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { FooterComponent } from './components/footer/footer.component';
 
@@ -16,13 +15,13 @@ import { UserService } from './services/user/user.service';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
+import { MenusModule } from './menus/menus.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    MenusComponent,
     ContactsComponent,
     FooterComponent,
   ],
@@ -31,11 +30,12 @@ import { AuthModule } from './auth/auth.module';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    AuthModule
+    AuthModule,    
   ],
   providers: [
     AuthService,
     UserService,
+    
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
