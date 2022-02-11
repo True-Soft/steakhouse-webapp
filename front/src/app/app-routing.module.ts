@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { MenusComponent } from './components/menus/menus.component';
+import { MenuComponent } from './menus/components/menu/menu.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent},
-  { path: 'menu', component: MenusComponent},
+  { path: 'home', component: HomeComponent },
+  { 
+    path: 'menu', 
+    component: MenuComponent, 
+    loadChildren : () => import('./menus/menus.module').then(m => m.MenusModule)
+  },
   { path: 'contacts', component: ContactsComponent},
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
 ];
