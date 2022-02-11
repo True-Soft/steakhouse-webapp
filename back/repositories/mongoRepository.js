@@ -24,7 +24,7 @@ module.exports = {
 
     async getMenuSubjects() {
         try {
-            return await Menu.find({});
+            return await Menu.aggregate([ {$group : {_id:{subject: "$subject"}}}]);
         } catch(err) {
             throw new internalServerError(err);
         }

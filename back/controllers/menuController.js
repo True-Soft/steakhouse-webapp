@@ -14,7 +14,11 @@ module.exports = {
     async getMenuSubjects(req , res) {
         try {
             const subjectArr = await mongoRepository.getMenuSubjects();
-            res.json(subjectArr);
+            let uniqSubjectArr = []
+            for(subject of subjectArr) {
+                uniqSubjectArr.push(subject._id.subject)
+            }
+            res.json(uniqSubjectArr);
         }catch(err) {
             res.status(err.status).json(err.message);
         }
