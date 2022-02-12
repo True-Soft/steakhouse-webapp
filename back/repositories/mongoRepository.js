@@ -8,7 +8,7 @@ const { getMenuSubjects } = require('../controllers/menuController');
 module.exports = {
     async getMenuCollectionBySubject(subject) {
         try {
-            return await Menu.find({'subject': subject});
+            return await Menu.find({"subject": subject}).sort({"header": 1});
         } catch(err) {
             throw new internalServerError(err);
         }

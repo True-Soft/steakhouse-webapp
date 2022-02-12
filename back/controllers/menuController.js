@@ -5,7 +5,22 @@ module.exports = {
         try {
             const subject = req.params.subject;
             const menuArr = await mongoRepository.getMenuCollectionBySubject(subject);
-            res.json(menuArr);
+            const menuHeaders = [...new Map(menuArr.map(item =>
+                [item['header'], item])).values()];
+            let resultMenus = [];
+            let counter = 0;
+            for(header of menuHeaders) {
+                resultMenus.push({
+                    header: header.header,
+                    menus: []});
+                for(menu of menuArr) {
+                    if(header.header == menu.header) {
+                        resultMenus[counter].menus.push(menu);
+                    }
+                }
+                counter++;
+            }
+            res.json(resultMenus);
         }catch(err) {
             res.status(err.status).json(err.message);
         }
