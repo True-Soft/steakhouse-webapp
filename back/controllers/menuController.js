@@ -18,7 +18,10 @@ module.exports = {
             for(subject of subjectArr) {
                 uniqSubjectArr.push(subject._id.subject)
             }
-            res.json(uniqSubjectArr);
+            const lowerSubjects = uniqSubjectArr.map(element => {
+                return element.toLowerCase();
+              });
+            res.json(lowerSubjects.sort());
         }catch(err) {
             res.status(err.status).json(err.message);
         }
