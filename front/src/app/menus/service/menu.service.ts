@@ -20,6 +20,6 @@ export class MenuService {
   constructor(private http: HttpClient) { }
 
   getSubjects() {
-    return this.http.get<Menu[]>(this.getSubjectsURL);
+    return this.http.get<[]>(this.getSubjectsURL);
   }
 }

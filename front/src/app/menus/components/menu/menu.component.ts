@@ -10,7 +10,7 @@ import { Menu } from '../../service/menu.service';
 })
 export class MenuComponent implements OnInit {
 
-  menuPositions: Menu[] = []
+  menuPositions = []
 
   constructor (private menuService: MenuService) {
     this.menuService.getSubjects()
