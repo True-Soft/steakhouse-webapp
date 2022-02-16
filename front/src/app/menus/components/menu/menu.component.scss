@@ -7,25 +7,28 @@
     margin-block-start: 1rem;
     margin-block-end: 1rem;
 }
-.btn {
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 300;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    cursor: pointer;
-    user-select: none;
-    padding: 1rem 2rem;
-    margin-bottom: .5rem;
-    margin-right: .2rem;
-}
+
 .tabs-nav>li {
     display: inline-block;
 }
-.btn-tabs:hover, .btn-tabs:active, .btn-tabs.active, .open>.btn-tabs.dropdown-toggle, .btn-tabs:active:hover, .btn-tabs:active:focus, .btn-tabs:active.focus, .btn-tabs.active:hover, .btn-tabs.active:focus, .btn-tabs.active.focus, .open>.btn-tabs.dropdown-toggle:hover, .open>.btn-tabs.dropdown-toggle:focus, .open>.btn-tabs.dropdown-toggle.focus {
-    color: #fff;
-    background-color: #712d3d;
+
+.btn {
+    transition: all .2s ease-in-out 0s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-width: 2px;
+    font-weight: 500;
+    padding: 1rem 2rem;
+    margin: 0.5rem 0.25rem !important;
+    box-shadow: none;
+    color: #712d3d;
+    background-color: #fff;
     border-color: #712d3d;
-    border-radius: 50%;
 }
+
+.btn:hover, .btn.active {
+    background-color: #712d3d;
+    color: #fff;
+    text-decoration: none;
+}
+

@@ -1,18 +1,10 @@
 <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+  <diV class="info-block container">
+    <h1 class="title">{{title | uppercase}}</h1>
+  </diV>
   <div class="carousel-inner">
-    <div class="carousel-item active zxc" >
-      <img [src]="img" class="d-block" alt="...">
-    </div>
-    <div *ngFor="let dish of dishes " class="carousel-item zxc" >
-      <img src={{dish.image}} alt="image of {{dish.name}}" class="d-block">
+    <div *ngFor="let image of images; index as i" class="carousel-item transition-on" [ngClass]="[ i == 0 ? 'active' : '']">
+      <img src={{image}} alt="image of a dish" class="d-block">
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
 </div>

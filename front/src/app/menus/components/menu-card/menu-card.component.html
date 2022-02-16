@@ -1,45 +1,12 @@
-<div class ="container-sm">
+<div class ="container-sm" *ngFor="let menuCard of menuCards">
     <section class="menu-section">
         <div class="menu-section__header">
-            <h2 class="menu-header" role="heading" aria-level="2">Starter</h2>
+            <h2 class="menu-header" role="heading" aria-level="2">{{menuCard.header}}</h2>
         </div>
         <ul>
-            <li class="menu-item">
-                <p class="menu-item__heading" role="heading" aria-level="3">East Coast Oysters (4)</p>
-                <p class="menu-item__details">champagne mignonette</p>                
-            </li>
-            <li class="menu-item">
-			
-                <p class="menu-item__heading" role="heading" aria-level="3">Grilled Romaine Caesar</p>
-                <p class="menu-item__details">charred romaine, sourdough crumble, pecorino, broken vinaigrette</p>                 
-            </li>
-            <li class="menu-item">
-			
-                <p class="menu-item__heading" role="heading" aria-level="3">Grilled Romaine Caesar</p>
-                <p class="menu-item__details">charred romaine, sourdough crumble, pecorino, broken vinaigrette</p> 
-            </li>
-        </ul>
-    </section>
-</div>
-<div class ="container-sm">
-    <section class="menu-section">
-        <div class="menu-section__header">
-            <h2 class="menu-header" role="heading" aria-level="2">Starter</h2>
-        </div>
-        <ul>
-            <li class="menu-item">
-                <p class="menu-item__heading" role="heading" aria-level="3">East Coast Oysters (4)</p>
-                <p class="menu-item__details">champagne mignonette</p>            
-            </li>
-            <li class="menu-item">
-			
-                <p class="menu-item__heading" role="heading" aria-level="3">Grilled Romaine Caesar</p>
-                <p class="menu-item__details">charred romaine, sourdough crumble, pecorino, broken vinaigrette</p>                  
-            </li>
-            <li class="menu-item">
-			
-                <p class="menu-item__heading" role="heading" aria-level="3">Grilled Romaine Caesar</p>
-                <p class="menu-item__details">charred romaine, sourdough crumble, pecorino, broken vinaigrette</p>   
+            <li class="menu-item" *ngFor="let menu of menuCard.menus">
+                <p class="menu-item__heading" role="heading" aria-level="3">{{menu.title}}</p>
+                <p class="menu-item__details">{{menu.priceComment}}</p>                
             </li>
         </ul>
     </section>

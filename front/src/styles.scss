@@ -11,7 +11,9 @@ $color-brown: #c7a67f;
 $color-red:   #712d3d;
 $color-black: #000;
 
-
+body{
+    font-family: Oswald
+}
 
 .nav-link{
     font-family: Oswald;
@@ -26,3 +28,6 @@ $color-black: #000;
     color: $color-brown !important;
 }
 
+h1, h2, h3, h4, h5, h6{
+    color: #fff;
+}

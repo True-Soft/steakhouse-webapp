@@ -8,7 +8,7 @@ $color-black: #000;
 
 img{
     height: 100%;
-    width: auto;
+    width: 100%;
     object-fit: cover;
     display: block;
     margin-left: auto;
@@ -19,6 +19,32 @@ img{
     background-color: $color-red;
 }
 
-.zxc{
+.transition-on{
     transition: transform 0.6s ease-in-out !important;
+}
+
+.info-block{
+    z-index: 1;
+    height: 90px;
+    position: absolute;
+    width: 45%;
+    pointer-events: none;
+    background-color: #712D3D !important;
+    max-width: 100%;
+    padding-top: 1.5rem;
+    top: auto;
+    bottom: -2rem;
+    transform: none;
+    padding-bottom: 0rem;
+    left: 0rem;
+    right: auto;
+    box-shadow:  0 0 10px #000000;
+}
+
+.carousel{
+    margin-bottom: 2rem;
+}
+
+.title{
+    padding-left: 2rem;
 }

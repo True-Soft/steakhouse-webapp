@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Menu } from '../../service/menu.service';
+import { Menu, MenuService, Subject } from '../../service/menu.service';
 
 @Component({
   selector: 'app-menu-card',
@@ -11,16 +11,21 @@ import { Menu } from '../../service/menu.service';
 export class MenuCardComponent implements OnInit {
 
   title = '';
-  menuCards: Menu[] = [];
 
-  constructor(private activeRoute: ActivatedRoute) {
+  menuCards: Subject[] = [];
+
+  constructor(private activeRoute: ActivatedRoute, private menuService: MenuService) {
 
   }
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe(routeParams => {
       this.title = routeParams.subject;
-      
+      this.menuService.getMenuBySubject(this.title)
+        .subscribe(
+          res => { this.menuCards = res; console.log(this.menuCards) },
+          err => { console.log(err) }
+        )
     });
     
   }

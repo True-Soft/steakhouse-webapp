@@ -8,7 +8,9 @@ import { MenuService } from '../../service/menu.service';
 })
 export class MenuComponent implements OnInit {
 
-  menuPositions: String[] = []
+  menuPositions: string[] = [];
+  activeSubject = '';
+
 
   constructor (private menuService: MenuService) {
     this.menuService.getSubjects()
@@ -24,6 +26,10 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     
+  }
+
+  activeBtn(subjectToActivate: string) {
+    this.activeSubject = subjectToActivate;
   }
 
 }

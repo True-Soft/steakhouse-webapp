@@ -1,4 +1,6 @@
 <app-navbar></app-navbar>
-<app-carousel></app-carousel>
-<router-outlet></router-outlet>
+<app-carousel [photosNumber]='photosNumber'></app-carousel>
+<div class="container outlet-container">
+    <router-outlet></router-outlet>
+</div>
 <app-footer></app-footer>
