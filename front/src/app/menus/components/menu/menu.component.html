@@ -1,8 +1,10 @@
 <ul class="tabs-nav" role="tablist">
 					
     <li role="presentation" *ngFor="let menuPosition of menuPositions">
-        <a  routerLink="{{menuPosition}}" id="tab-dinner-copy-1" class="btn btn-tabs active"  role="tab" 
-        aria-controls="dinner-copy-1" aria-selected="true" data-order="1" tabindex="0">
+        <a  routerLink="{{menuPosition}}" id="tab-dinner-copy-1" class="btn btn-tabs"  role="tab" 
+        aria-controls="dinner-copy-1" aria-selected="true" data-order="1" tabindex="0"
+        [ngClass]="[ menuPosition == activeSubject ? 'active' : '']" 
+        (click)="activeBtn(menuPosition)">
             {{menuPosition}}
         </a>
     </li>

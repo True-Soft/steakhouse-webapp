@@ -17,7 +17,7 @@ import { MenusRoutingModule } from './menus-routing.module';
     MenusRoutingModule
   ],
   exports: [
-    MenuComponent
+    MenuComponent,
   ]
 })
 export class MenusModule {

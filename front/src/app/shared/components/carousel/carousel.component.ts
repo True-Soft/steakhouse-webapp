@@ -1,9 +1,5 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-
-interface Dish {
-  image: string,
-  name: string
-}
+import { Component, Input, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-carousel',
@@ -12,31 +8,29 @@ interface Dish {
 })
 export class CarouselComponent implements OnInit{
 
+  @Input()
+  photosNumber!: number;
+
+  title = ' '
+
   img = '../../../assets/images/dish0.jpg' 
 
-  images: string[] = [
-    '../../../assets/images/dish1.jpg', 
-    '../../../assets/images/dish2.jpg', 
-    '../../../assets/images/dish3.jpg'
-  ]
+  images: string[] = [];
 
-  names: string[] = [
-    'name one',
-    'name two',
-    'name three'
-  ] 
-  showNavigationArrows = true;
-  dishes: Dish[] = [
-    { image: this.images[0], name: this.names[0] },
-    { image: this.images[1], name: this.names[1]},
-    { image: this.images[2], name: this.names[2]},
-  ];
-
-  constructor() {
-
+  constructor(private router: Router) {
+    
   }
-  ngOnInit() {
 
+  ngOnInit() {
+    for (let i = 0; i < this.photosNumber; i++) {
+      this.images.push(`../../../assets/images/dish${i}.jpg`)
+    }
+    this.router.events.subscribe((event) => {
+      if(event instanceof NavigationEnd) {
+        this.title = event.urlAfterRedirects.split('/')[1]
+        
+      }
+    });
   }
 }
 
