@@ -4,9 +4,14 @@
             <h2 class="menu-header" role="heading" aria-level="2">{{menuCard.header}}</h2>
         </div>
         <ul>
-            <li class="menu-item" *ngFor="let menu of menuCard.menus">
-                <p class="menu-item__heading" role="heading" aria-level="3">{{menu.title}}</p>
-                <p class="menu-item__details">{{menu.priceComment}}</p>                
+            <li class="menu-item d-flex" *ngFor="let menu of menuCard.menus">
+                <div class="menu-item-info">
+                    <p class="menu-item__heading" role="heading" aria-level="3">{{menu.title}}</p>
+                    <p class="menu-item__details">{{menu.priceComment}}</p>         
+                </div>
+                <div class="add-menu-item">
+                    <button type="button" class="btn btn-sm add-menu-item-btn" (click)="addToCart(menu)">Add to cart</button>
+                </div>        
             </li>
         </ul>
     </section>

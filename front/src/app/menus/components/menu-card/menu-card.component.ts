@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Menu, MenuService, Subject } from '../../service/menu.service';
+import { Subscription } from 'rxjs';
+import { Menu, MenuService, MenuSubject } from '../../service/menu.service';
 
 @Component({
   selector: 'app-menu-card',
@@ -8,26 +9,46 @@ import { Menu, MenuService, Subject } from '../../service/menu.service';
   styleUrls: ['./menu-card.component.scss'],
   
 })
-export class MenuCardComponent implements OnInit {
+export class MenuCardComponent implements OnInit, OnDestroy {
 
   title = '';
-
-  menuCards: Subject[] = [];
+  cart: Menu[] = [];
+  getMenuBySubjectSubscription?: Subscription;
+  getSubjectValueSubscription?: Subscription;
+  menuCards: MenuSubject[] = [];
 
   constructor(private activeRoute: ActivatedRoute, private menuService: MenuService) {
 
   }
 
   ngOnInit(): void {
-    this.activeRoute.params.subscribe(routeParams => {
-      this.title = routeParams.subject;
-      this.menuService.getMenuBySubject(this.title)
-        .subscribe(
-          res => { this.menuCards = res; console.log(this.menuCards) },
-          err => { console.log(err) }
-        )
-    });
-    
+    this.getSubjectValueSubscription = this.menuService.getSubjectValue()
+      .subscribe(
+        res => {
+          this.title = res;
+          if(res){
+            this.getMenuBySubjectSubscription = this.menuService.getMenuBySubject(this.title)
+            .subscribe(
+              res => { this.menuCards = res; },
+              err => { console.log(err) }
+            )
+          }
+        },
+      );    
+  }
+
+  ngOnDestroy() {
+    this.getMenuBySubjectSubscription?.unsubscribe();
+    this.getSubjectValueSubscription?.unsubscribe();
+  }
+
+  addToCart(item: Menu){ 
+    if(localStorage.getItem('cart')) {
+      this.cart = JSON.parse(localStorage.getItem('cart') || '{}');
+    } 
+    this.cart.push(item);
+    localStorage.setItem('cart', JSON.stringify(this.cart));
+    console.log(JSON.parse(localStorage.getItem('cart')|| '{}'));
   }
 
 }

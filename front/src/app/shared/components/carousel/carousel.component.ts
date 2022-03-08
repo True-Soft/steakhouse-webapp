@@ -27,7 +27,8 @@ export class CarouselComponent implements OnInit{
     }
     this.router.events.subscribe((event) => {
       if(event instanceof NavigationEnd) {
-        this.title = event.url.split('/')[1]
+        this.title = event.urlAfterRedirects.split('/')[1]
+        
       }
     });
   }
