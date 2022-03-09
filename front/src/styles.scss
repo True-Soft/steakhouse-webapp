@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@use './abstracts' as *;
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
@@ -6,17 +7,12 @@
 /* importing font family Oswald. */
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&display=swap');
 
-$color-white: #fff;
-$color-brown: #c7a67f;
-$color-red:   #712d3d;
-$color-black: #000;
 
 body{
     font-family: Oswald
 }
 
 .nav-link{
-    font-family: Oswald;
     font-weight: 500;
     font-size: 1rem;
     text-transform: uppercase;
@@ -28,12 +24,46 @@ body{
     color: $color-brown !important;
 }
 
-h1, h2, h3, h4, h5, h6{
-    color: #fff;
+h1, h3, h4, h5, h6{
+    color: $color-white;
 }
 
 h2{
-    color: #712d3d;
+    color: $color-red;
     font-weight: 500;
     text-transform: uppercase;
+}
+
+.hidden{
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+.visible{
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.btn{
+    color: $color-red;
+    background-color: $color-white;
+    border: $color-red 2px solid;
+    box-shadow: none;
+    transition: all 0.2s ease-in-out 0s;
+}
+
+.btn:focus{
+    box-shadow: none;
+}
+
+.btn:hover{
+    background-color: $color-red;
+    color:  $color-white;
+
+}
+
+.btn.active {
+    background-color: $color-red;
+    color: $color-white;
+    text-decoration: none;
 }
