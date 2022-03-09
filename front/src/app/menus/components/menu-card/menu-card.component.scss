@@ -1,72 +1,49 @@
-$color-red:   #712d3d;
-
-
 .container-sm{
     padding-left: 1.85rem;
     padding-right: 1.85rem;
     margin-left: auto;
     margin-right: auto;
     max-width: 640px;
-}
 
-.menu-section{
-    padding: 2rem;
-    text-align: left;
-    margin-bottom: 2.5rem;
-    background-color: #f9f7f1;
-    padding: 2rem;
-}
+    .menu-section{
+        text-align: left;
+        margin-bottom: 2.5rem;
+        background-color: #f9f7f1;
+        padding: 2rem;
 
-.menu-item{
-    margin-bottom: 1.5rem;
-}
+        ul {
+            padding-left: 0;
+            list-style: none;
+        }
 
-.menu-item__heading{
-    font-size: 1.25rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    line-height: 1.5;
-    margin-bottom: 0;
-}
+        .menu-header {
+            font-weight: bold;
+            font-size: 3rem;
+            margin-bottom: 0;
+            border-bottom: 2px solid;
+        }
 
-.menu-item__details {
-    font-weight: 100;
-    font-size: 1rem;
-}
+        .menu-item{
+            margin-bottom: 1.5rem;
+            justify-content: space-between;
+        
+            .menu-item__heading{
+                font-size: 1.25rem;
+                font-weight: bold;
+                text-transform: uppercase;
+                line-height: 1.5;
+                margin-bottom: 0;
+            }
+            
+            .menu-item__details {
+                font-weight: 100;
+                font-size: 1rem;
+            }
 
-.menu-header {
-    color: #712d3d;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 3rem;
-    margin-bottom: 0;
-    border-bottom: 2px solid;
-}
-
-.menu-section>ul {
-    padding-left: 0;
-    list-style: none;
-}
-
-.menu-item{
-    justify-content: space-between;
-}
-
-
-.add-menu-item-btn{
-    margin-top: 1rem;
-    font-size: large;
-    color: $color-red;
-    border: $color-red 2px solid;
-    transition: all 0.2s ease-in-out 0s;
-}
-
-.add-menu-item-btn:focus{
-    box-shadow: none;
-}
-
-.add-menu-item-btn:hover{
-    background-color: #712d3d;
-    color: white;
-
+            .add-menu-item-btn{
+                margin-top: 1rem;
+                font-size: large;
+            }
+        }
+    }
 }
