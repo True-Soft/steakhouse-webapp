@@ -7,7 +7,8 @@
             <li class="menu-item d-flex" *ngFor="let menu of menuCard.menus">
                 <div class="menu-item-info">
                     <p class="menu-item__heading" role="heading" aria-level="3">{{menu.title}}</p>
-                    <p class="menu-item__details">{{menu.priceComment}}</p>         
+                    <p class="menu-item__details">{{menu.priceComment}}</p>
+                    <p class="menu-item__details">{{menu.price}} $</p>                  
                 </div>
                 <div class="add-menu-item">
                     <button type="button" class="btn btn-sm add-menu-item-btn" (click)="addToCart(menu)">Add to cart</button>

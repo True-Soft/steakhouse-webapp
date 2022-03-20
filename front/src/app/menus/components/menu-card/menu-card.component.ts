@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Menu, MenuService, MenuSubject } from '../../service/menu.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
+import { CartItems, Menu, MenuService, MenuSubject } from '../../service/menu.service';
 
 @Component({
   selector: 'app-menu-card',
@@ -12,16 +12,18 @@ import { Menu, MenuService, MenuSubject } from '../../service/menu.service';
 export class MenuCardComponent implements OnInit, OnDestroy {
 
   title = '';
-  cart: Menu[] = [];
+  cart: CartItems[] = [];
   getMenuBySubjectSubscription?: Subscription;
   getSubjectValueSubscription?: Subscription;
   menuCards: MenuSubject[] = [];
 
-  constructor(private activeRoute: ActivatedRoute, private menuService: MenuService) {
-
-  }
+  constructor(
+    private menuService: MenuService,
+    private storage: StorageService
+  ) {  }
 
   ngOnInit(): void {
+    
     this.getSubjectValueSubscription = this.menuService.getSubjectValue()
       .subscribe(
         res => {
@@ -43,12 +45,20 @@ export class MenuCardComponent implements OnInit, OnDestroy {
   }
 
   addToCart(item: Menu){ 
-    if(localStorage.getItem('cart')) {
-      this.cart = JSON.parse(localStorage.getItem('cart') || '{}');
-    } 
-    this.cart.push(item);
-    localStorage.setItem('cart', JSON.stringify(this.cart));
-    console.log(JSON.parse(localStorage.getItem('cart')|| '{}'));
-  }
+    let added = false;
+    if(this.storage.retrieveValue('cart')) {
+      this.cart = JSON.parse(this.storage.retrieveValue('cart'));
 
+      for (let i = 0; i < this.cart.length; i++) {
+        if (this.cart[i].item.title == item.title) {
+          this.cart[i].count++;
+          added = true
+        };
+      }
+    } 
+    
+    if (!added) this.cart.push({item: item, count: 1});
+    this.storage.saveValue('cart', JSON.stringify(this.cart));
+    //console.log(JSON.parse(this.storage.retrieveValue('cart')));
+  }
 }

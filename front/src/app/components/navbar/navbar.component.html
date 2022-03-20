@@ -6,15 +6,23 @@
         <a class="popup-close-btn" (click)="closeCart()"> x </a>
       </div>
       <div class="cart-items">
-
-      </div>
-      <hr>
-      <div class="cart-price d-flex justify-content-between">
-        
-        <p>Total price: {{totalPrice}}</p>
-        <button class="btn btn-sm cart-buy-btn">Buy</button>
+          <div class="cartItemContainer container-sm d-flex justify-content-between" *ngFor="let cartItem of cart">
+            <div>
+              <div>{{cartItem.item.title}}</div>
+              <p>{{cartItem.item.price}}$ X {{cartItem.count}} = {{cartItem.item.price*cartItem.count}}</p>
+            </div>
+            <div class="itemCounter d-flex">
+              <div (click)="deleteItem(cartItem.item.title, cartItem.count)" class="reduseBtn"> - </div>
+              <div class="itemsCount"> {{cartItem.count}} </div>
+              <div (click)="addItem(cartItem.item.title, cartItem.count)" class="addBtn"> + </div>
+            </div>
+          </div>
       </div>
       
+      <div class="cart-price d-flex justify-content-between">
+        <p>Total price: {{totalPrice| number: '2.1-1'}}</p>
+        <button class="btn btn-sm cart-buy-btn">Buy</button>
+      </div>
     </div>
   </div>
 </div>
@@ -46,8 +54,9 @@
             <a class="nav-link" routerLink='contacts'>CONTACTS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" (click)="openCart()">
+            <a class="nav-link position-relative" (click)="openCart()">
               <img class="cart-icon" src="../../../assets/images/cart-icon.png" title="Cart"  alt="Cart">
+              <div [ngClass]="[ totalItemsInCart ? '' : 'hidden']" class="totalCartItemsNumber position-absolute bottom-0 end-0">{{totalItemsInCart}}</div>
             </a>
           </li>
         </ul>
