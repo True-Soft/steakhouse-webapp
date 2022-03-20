@@ -53,6 +53,14 @@
             .cart-icon:hover {
                 background-color: $color-brown;
             }
+
+            .totalCartItemsNumber{
+                width: 24px;
+                border: 1px solid $color-red;
+                border-radius: 10px ;
+                background: $color-red;
+                cursor: pointer;
+            }
         }
     }
 }
@@ -62,7 +70,7 @@
     top: 0;
     left: 0;
     height: 100%;
-    width: 100%;
+    width: auto;
     z-index: 99;
     visibility: hidden;
     opacity: 0;
@@ -93,10 +101,46 @@
 
             .cart-items {
                 height: 100%;
+
+                .cartItemContainer {
+                    margin-top: 10px;
+                    padding-bottom: 10px;
+                    border-bottom: 1px solid rgb(200, 201, 202);
+
+                    .reduseBtn, .addBtn, .itemsCount{
+                        width: 30px;
+                        height: 30px;
+                        color: $color-white;
+                        border: 1px solid;
+                        border-radius: 5px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+    
+                    .reduseBtn, .addBtn{
+                        background-color: $color-red;
+                        cursor: pointer;
+                        font-weight: 500;
+                        font-size:x-large;
+                        transition: all 0.2s ease-in-out 0s;
+                    }
+                    
+                    .reduseBtn:hover, .addBtn:hover{
+                        color: $color-red;
+                        background-color: $color-white;
+                        border: 3px solid $color-red;
+                    }
+    
+                    .itemsCount{
+                        background-color: $color-brown;
+                    }
+                }
+
             }
             
             .cart-price {
-                margin-top: auto;
+                margin-top: 10px;
                 
                 .cart-buy-btn{
                     font-size: large;
@@ -135,5 +179,9 @@
 @media (max-width: 500px) {
     .container-fluid {
         padding: 0.5rem 0.75rem;
+    }
+    
+    .popup-continer {
+        width: 315px !important;
     }
 }

@@ -16,6 +16,8 @@ import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { MenusModule } from './menus/menus.module';
+import { NgxWebstorageModule } from 'ngx-webstorage';
+
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { MenusModule } from './menus/menus.module';
     AppRoutingModule,
     SharedModule,
     AuthModule,    
+    NgxWebstorageModule.forRoot(),
   ],
   providers: [
     AuthService,

@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 export interface Menu {
   _id: string,
   title: string,
-  price: string,
+  price: number,
   priceComment?: string,
   header?: string,
   subject: string,
@@ -14,6 +14,11 @@ export interface Menu {
 export interface MenuSubject {
   header: string,
   menus: Menu[],
+}
+
+export interface CartItems {
+  item: Menu,
+  count: number,
 }
 
 @Injectable({
