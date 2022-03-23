@@ -1,6 +1,7 @@
 import {  Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CartItems, Menu, MenuService, MenuSubject } from 'src/app/menus/service/menu.service';
+import { CartService, Cart } from 'src/app/services/cart/cart.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 
 @Component({
@@ -14,6 +15,7 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 
 export class NavbarComponent implements OnInit {
   getSubjectsSubscription?: Subscription;
+  cartSubscription?: Subscription;
 
   subject = '';
   scrollTop = window.scrollY;
@@ -25,11 +27,11 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private menuService: MenuService,
-    private storage: StorageService
+    private cartService: CartService
   ) {  }
 
   ngOnInit(): void {
-    this.initCart()
+    this.initCart();
     window.addEventListener('scroll', this.scroll, true);
     this.getSubjectsSubscription = this.menuService.getSubjects()
       .subscribe(
@@ -45,6 +47,7 @@ export class NavbarComponent implements OnInit {
   ngOnDestroy() {
     window.removeEventListener('scroll', this.scroll, true);
     this.getSubjectsSubscription?.unsubscribe();
+    this.cartSubscription?.unsubscribe();
   }
 
 
@@ -56,60 +59,30 @@ export class NavbarComponent implements OnInit {
     this.menuService.setSubjectValue(this.subject);
   }
 
+  initCart(){
+    return this.cartService.observeCart()
+      .subscribe((value ) =>{
+          this.cart = value.items;
+          this.totalItemsInCart = value.totalItemsInCart;
+          this.totalPrice = value.totalPrice;
+          console.log(this.cart)
+        }
+      )
+  }
+
   openCart(){
     this.cartActive = true;
   }
 
+  addItemToCart(title: string, count: number){
+    this.cartService.addItemToCart(title, count)
+  }
+
+  removeItemFromCart(title: string, count: number){
+    this.cartService.removeItemFromCart(title, count)
+  }
+
   closeCart(){
     this.cartActive = false;
-  }
-
-  initCart(){
-    this.storage.saveValue('cart', JSON.stringify([]));
-
-    if( JSON.parse(this.storage.retrieveValue('cart')) ){
-      this.cart = JSON.parse(this.storage.retrieveValue('cart'));
-      //console.log(this.cart);
-      for (let i = 0; i < this.cart.length; i++) {
-        this.totalItemsInCart += this.cart[i].count
-        this.totalPrice += this.cart[i].count*this.cart[i].item.price;
-      }
-    }
-
-    this.storage.observeStorageIten('cart')
-      .subscribe((value) => {
-        if (value) {
-          this.cart = JSON.parse(this.storage.retrieveValue('cart'));
-          this.totalItemsInCart = 0;
-          this.totalPrice = 0;
-          for (let i = 0; i < this.cart.length; i++) {
-            this.totalItemsInCart += this.cart[i].count
-            this.totalPrice += this.cart[i].count*this.cart[i].item.price;
-          }
-        }
-      });
-  }
-
-  addItem(title: string, count: number){
-    for (let i = 0; i < this.cart.length; i++) {
-      if(this.cart[i].item.title == title && count > 0 ) {
-        this.cart[i].count++;
-        break;
-      }
-    }
-    this.storage.saveValue('cart', JSON.stringify(this.cart));
-    //console.log(JSON.parse(this.storage.retrieveValue('cart')));
-  }
-
-  deleteItem(title: string, count: number){
-    for (let i = 0; i < this.cart.length; i++) {
-      if(this.cart[i].item.title == title &&  count > 0 ) {
-        this.cart[i].count--;
-        if(this.cart[i].count == 0) this.cart.splice(i,1);
-        break;
-      }
-    }
-    this.storage.saveValue('cart', JSON.stringify(this.cart));
-    //console.log(JSON.parse(this.storage.retrieveValue('cart')));
   }
 }
