@@ -24,7 +24,7 @@ export class StorageService {
     this.lStorage.clear();
   }
 
-  observeStorageIten(key: string) {
+  observeStorageItem(key: string) {
     return this.lStorage.observe(key);
   }
 }

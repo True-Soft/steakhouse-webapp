@@ -12,9 +12,9 @@
               <p>{{cartItem.item.price}}$ X {{cartItem.count}} = {{cartItem.item.price*cartItem.count}}</p>
             </div>
             <div class="itemCounter d-flex">
-              <div (click)="deleteItem(cartItem.item.title, cartItem.count)" class="reduseBtn"> - </div>
+              <div (click)="removeItemFromCart(cartItem.item.title, cartItem.count)" class="reduseBtn"> - </div>
               <div class="itemsCount"> {{cartItem.count}} </div>
-              <div (click)="addItem(cartItem.item.title, cartItem.count)" class="addBtn"> + </div>
+              <div (click)="addItemToCart(cartItem.item.title, cartItem.count)" class="addBtn"> + </div>
             </div>
           </div>
       </div>
