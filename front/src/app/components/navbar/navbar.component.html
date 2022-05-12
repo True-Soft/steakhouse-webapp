@@ -21,13 +21,13 @@
       
       <div class="cart-price d-flex justify-content-between">
         <p>Total price: {{totalPrice| number: '2.1-1'}}</p>
-        <button class="btn btn-sm cart-buy-btn">Buy</button>
+        <button class="btn btn-sm cart-buy-btn" routerLink='order' (click)="closeCart()">Buy</button>
       </div>
     </div>
   </div>
 </div>
 
-<nav id="navbar"  class="navbar navbar-expand-lg  fixed-top" [ngClass]="[ scrollTop ? '' : 'navbar-transparent']">
+<nav id="navbar"  class="navbar navbar-expand-lg  fixed-top {{navbarPosition}}" [ngClass]="[ scrollTop ? '' : 'navbar-transparent']">
     <div class="container-fluid justify-content-between">
         <a class="navbar-brand" href="#">
             <a routerLink='home'>

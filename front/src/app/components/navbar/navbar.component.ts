@@ -1,4 +1,5 @@
 import {  Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CartItems, Menu, MenuService, MenuSubject } from 'src/app/menus/service/menu.service';
 import { CartService, Cart } from 'src/app/services/cart/cart.service';
@@ -16,8 +17,11 @@ import { StorageService } from 'src/app/services/storage/storage.service';
 export class NavbarComponent implements OnInit {
   getSubjectsSubscription?: Subscription;
   cartSubscription?: Subscription;
+  routerEventsSubscription?: Subscription;
 
   subject = '';
+  title = '';
+
   scrollTop = window.scrollY;
 
   cart: CartItems[] = [];
@@ -25,14 +29,29 @@ export class NavbarComponent implements OnInit {
   totalPrice = 0;
   totalItemsInCart = 0;
 
+  navbarPosition = 'p-fixed';
+
   constructor(
     private menuService: MenuService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router
   ) {  }
 
   ngOnInit(): void {
-    this.initCart();
+    this.cartSubscription = this.initCart();
+
     window.addEventListener('scroll', this.scroll, true);
+
+    this.router.events.subscribe((event) => {
+      if(event instanceof NavigationEnd) {
+        this.title = event.urlAfterRedirects.split('/')[1];
+        if(this.title == "order") {
+          this.scrollTop = 1
+          this.navbarPosition = "p-inherit"
+        };
+      }
+    });
+    
     this.getSubjectsSubscription = this.menuService.getSubjects()
       .subscribe(
         res => {
@@ -52,7 +71,11 @@ export class NavbarComponent implements OnInit {
 
 
   scroll = (event: Event): void => {
-    this.scrollTop = window.scrollY;
+    if(this.title != "order") {
+      this.scrollTop = window.scrollY
+      this.navbarPosition = "p-fixed"
+    };
+      
   };
 
   setSubject(){

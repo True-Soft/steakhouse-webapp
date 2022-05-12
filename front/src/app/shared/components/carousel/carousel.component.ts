@@ -11,11 +11,12 @@ export class CarouselComponent implements OnInit{
   @Input()
   photosNumber!: number;
 
-  title = ' '
+  title = ' ';
 
-  img = '../../../assets/images/dish0.jpg' 
-
+  img = '../../../assets/images/dish0.jpg' ;
   images: string[] = [];
+
+  showCarousel = true;
 
   constructor(private router: Router) {
     
@@ -23,12 +24,13 @@ export class CarouselComponent implements OnInit{
 
   ngOnInit() {
     for (let i = 0; i < this.photosNumber; i++) {
-      this.images.push(`../../../assets/images/dish${i}.jpg`)
+      this.images.push(`../../../assets/images/dish${i}.jpg`);
     }
     this.router.events.subscribe((event) => {
       if(event instanceof NavigationEnd) {
-        this.title = event.urlAfterRedirects.split('/')[1]
-        
+        this.title = event.urlAfterRedirects.split('/')[1];
+        if(this.title == 'order') this.showCarousel = false;
+        else this.showCarousel = true;
       }
     });
   }
