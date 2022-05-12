@@ -9,7 +9,16 @@
 
 
 body{
-    font-family: Oswald
+    font-family: Oswald;
+    min-height: 100vh;
+    margin:0px;
+
+    app-root{
+        min-height: 100vh;
+        display: block;
+        position: relative;
+        padding-bottom: 150px;
+    }
 }
 
 .nav-link{

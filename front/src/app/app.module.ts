@@ -17,6 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { MenusModule } from './menus/menus.module';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import { OrderComponent } from './components/order/order.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { NgxWebstorageModule } from 'ngx-webstorage';
     HomeComponent,
     ContactsComponent,
     FooterComponent,
+    OrderComponent,
   ],
   imports: [
     HttpClientModule,
